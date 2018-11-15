@@ -1,8 +1,8 @@
-function [ Q, R, L ] = Algorithm3( A )
+function [ Q, R, L ] = Algorithm4( A )
 
 % Implemented in NREL
 % QR decomposition using mGS with trianglular solve insted of iteration.
-% Sample use: A = rand(100); Algorithm3(A);
+% Sample use: A = rand(100); Algorithm4(A);
 
 n=size(A, 1);
 m=size(A, 2);
