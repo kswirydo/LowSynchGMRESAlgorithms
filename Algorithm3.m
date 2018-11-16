@@ -1,8 +1,9 @@
 function [ Q, R, L ] = Algorithm3( A )
 
-Implemented in NREL
-QR decomposition using two synch classical GS .
-Sample use: A = rand(100); Algorithm3(A);
+% Implemented in NREL
+% QR decomposition using two synch classical GS .
+% Sample use: A = rand(100); Algorithm3(A);
+% (c) Julien Langou (CU Denver), K. Smirydowicz (NREL), S. J. Thomas (NREL)
 
 n=size(A, 1);
 m=size(A, 2);

@@ -2,6 +2,7 @@
 % this code is not restarted - not meant for large matrices (!!!)
 % Example use: A = rand(1000,1); b = rand(1000,1); x=zeros(1000,1);
 % Algorithm9(A,b,x0,1e-10);
+% (c) Julien Langou (CU Denver), K. Smirydowicz (NREL), S. J. Thomas (NREL)
 
 function [r,normhistory ] =  Algorithm9(A, b, x0, tol)
 r = b-A*x0;
