@@ -16,26 +16,21 @@ R(1,1) = norm(A(:,1));
 Q(:,1) = A(:,1)/norm(A(:,1));
 
 for i=2: m
-a = A(:, i);
-R(1:i-1, i) = zeros(i-1,1);
-for k=1:iter
-s = Q(:, 1:i-1)'*a;
-R(1:i-1, i) = R(1:i-1, i) +s;
-a = a - Q(:, 1:i-1)*s;
-
-end
-
-
-
-R( i, i) = norm(a);
-Q(:, i) =  a/R(i,i);
-
-
-
-
+    a = A(:, i);
+    R(1:i-1, i) = zeros(i-1,1);
+    for k=1:iter
+        s = Q(:, 1:i-1)'*a;
+        R(1:i-1, i) = R(1:i-1, i) +s;
+        a = a - Q(:, 1:i-1)*s;
+        
+    end
+   
+    R( i, i) = norm(a);
+    Q(:, i) =  a/R(i,i);
+   
 end
 
 fprintf('||Q(:,1:%d)^TQ(:, 1:%d) - I|| = %16.16e|| \n', m, m, norm(Q(:, 1:m )'*Q(:, 1:m)-eye(m,m)));
- fprintf('||A - QR||/||A|| = %16.16e \n\n', norm(A-Q*R, 'fro')/norm(A, 'fro'));
+fprintf('||A - QR||/||A|| = %16.16e \n\n', norm(A-Q*R, 'fro')/norm(A, 'fro'));
 
 end

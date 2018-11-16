@@ -1,13 +1,13 @@
 function [Q1, R1, T1] = mgs_lvl2(Q,R, T, j)
-%this is the inner part of the loop in Alg 6
+%this is the inner part of the loop in Alg 6 (needed for alg 9)
+% (c) Julien Langou (CU Denver), K. Smirydowicz (NREL), S. J. Thomas (NREL)
+
 n = size(Q, 1);
 if j>1
     
     
     tmp = Q(1:n,1:j-1)'*Q(1:n,j-1:j); %%%%%%%%% <- this is the only synchronization
-    
-    
-    
+      
     T(1:j-2,j-1) = tmp(1:j-2,1);
     R(j-1,j-1) = tmp(j-1,1);
     R(1:j-1,j) = tmp(1:j-1,2);
