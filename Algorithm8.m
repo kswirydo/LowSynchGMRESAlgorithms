@@ -2,8 +2,9 @@
 % this code is not restarted - not meant for large matrices (!!!)
 % Example use: A = rand(1000,1); b = rand(1000,1); x=zeros(1000,1);
 % Algorithm8(A,b,x0,1e-10);
-f
-unction [r,normhistory ] =  Agorithm8(A, b, x0, tol)
+% (c) Julien Langou (CU Denver), K. Smirydowicz (NREL), S. J. Thomas (NREL)
+
+function [r,normhistory ] =  Agorithm8(A, b, x0, tol)
 r = b-A*x0;
 tol = tol * norm(r);
 [n m] = size(A);

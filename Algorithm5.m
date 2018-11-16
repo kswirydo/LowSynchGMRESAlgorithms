@@ -3,6 +3,7 @@ function [ Q, R, L ] = Algorithm5( A )
 % Implemented in NREL
 % QR decomposition with triangular solve lagged mod GS .
 % Sample use: A = rand(100); Algorithm5(A);
+% (c) Julien Langou (CU Denver), K. Smirydowicz (NREL), S. J. Thomas (NREL)
 
 n=size(A, 1);
 m=size(A, 2);
