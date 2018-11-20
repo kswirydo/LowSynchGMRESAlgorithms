@@ -20,7 +20,7 @@ for j=1: m
     if j>1
         
         
-        tmp = Q(1:n,1:j-1)'*Q(1:n,j-1:j); %%%%%%%%% <- this is the only synchronization
+        tmp = Q(1:n,1:j-1)'*Q(1:n,j-1:j); %%%%%%%%% <- first sync
         %
         T(1:j-2,j-1) = tmp(1:j-2,1);
         R(j-1,j-1) = tmp(j-1,1);
@@ -38,7 +38,7 @@ for j=1: m
         R(1:j-1,j) = (eye(j-1, j-1) - L(1:j-1, 1:j-1)-L(1:j-1, 1:j-1)')*R(1:j-1,j);
      
         Q(1:n,j) = Q(1:n,j) - Q(1:n,1:j-1)*R(1:j-1,j);
-        Q(1:n,j) = Q(1:n,j) - Q(:,1:j-1)*(Q(:,1:j-1)'*Q(:, j));
+        Q(1:n,j) = Q(1:n,j) - Q(:,1:j-1)*(Q(:,1:j-1)'*Q(1:n,j));  %%% mass IP second sync
         
         
     end
