@@ -40,6 +40,7 @@ for j=1: m
         Q(1:n,j) = Q(1:n,j) - Q(1:n,1:j-1)*R(1:j-1,j);
         Q(1:n,j) = Q(1:n,j) - Q(:,1:j-1)*(Q(:,1:j-1)'*Q(:, j));
         
+        
     end
 end
 R(m,m) = norm(Q(:,m));

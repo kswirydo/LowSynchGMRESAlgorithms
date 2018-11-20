@@ -21,12 +21,12 @@ for j=2: m
     for i=1:j-1
         s = Q(:, i)'*a;
         a = a - s*Q(:,i);
-        R(i, j) = R(i, j) +s;        
+        R(i, j) = R(i, j) +s;
     end
-  
+    
     R( j, j) = norm(a);
     Q(:, j) =  a/R(j,j);
-
+    
 end
 
 fprintf('||Q(:,1:%d)^TQ(:, 1:%d) - I|| = %16.16e|| \n', m, m, norm(Q(:, 1:m )'*Q(:, 1:m)-eye(m,m)));

@@ -29,50 +29,50 @@ s      = norm(r)*e1;
 normhistory(1) = norm(r);
 while ((norm(r)>tol)&&conv == 0);
     i = i+1;
-   
-      
-V(:,i+1) = A*V(:,i);
-[V(:, 1:i+1), R(1:i+1,1:i+1) , T(1:i+1,1:i+1) ] = mgs_lvl2(V,R, T, i+1);
-R(i+1,i+1) = norm(V(:,i+1));
-V(:,i+1) = V(:,i+1)/norm(V(:,i+1));
-H(1:i+1,i) = R(1:i+1,i+1);
-
-        
-        
-
- 
-   
-     
-     
- 
     
+    
+    V(:,i+1) = A*V(:,i);
+    [V(:, 1:i+1), R(1:i+1,1:i+1) , T(1:i+1,1:i+1) ] = mgs_lvl2(V,R, T, i+1);
+    R(i+1,i+1) = norm(V(:,i+1));
+    V(:,i+1) = V(:,i+1)/norm(V(:,i+1));
+    H(1:i+1,i) = R(1:i+1,i+1);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    % Apply Givens rotation
+    for k = 1:i-1
+        temp     =  cs(k)*H(k,i) + conj(sn(k))*H(k+1,i);
+        H(k+1,i) = -sn(k)*H(k,i) + conj(cs(k))*H(k+1,i);
+        H(k,i)   = temp;
+    end
+    
+    % Form i-th rotation matrix
+    [ cs(i), sn(i) ] = rotmat( H(i,i), H(i+1,i) );
+    
+    % Approximate residual norm
+    temp        = cs(i)*s(i);
+    s(i+1)      = -sn(i)*s(i);
+    s(i)        = temp;
+    H(i,i)      = cs(i)*H(i,i) + conj(sn(i))*H(i+1,i);
+    H(i+1,i)    = 0.0;
+    normhistory(i+1) = abs(s(i+1));
+    
+    
+    
+    if normhistory(i) <= tol
+        conv = 1;
         
-        % Apply Givens rotation
-        for k = 1:i-1
-            temp     =  cs(k)*H(k,i) + conj(sn(k))*H(k+1,i);
-            H(k+1,i) = -sn(k)*H(k,i) + conj(cs(k))*H(k+1,i);
-            H(k,i)   = temp;
-        end
-        
-        % Form i-th rotation matrix
-        [ cs(i), sn(i) ] = rotmat( H(i,i), H(i+1,i) );
-        
-        % Approximate residual norm
-        temp        = cs(i)*s(i);
-        s(i+1)      = -sn(i)*s(i);
-        s(i)        = temp;
-        H(i,i)      = cs(i)*H(i,i) + conj(sn(i))*H(i+1,i);
-        H(i+1,i)    = 0.0;
-        normhistory(i+1) = abs(s(i+1));
-        
-        
-        
-        if normhistory(i) <= tol
-            conv = 1;
-            
-        end
-   
-      
+    end
+    
+    
     
 end
 i=i-1;

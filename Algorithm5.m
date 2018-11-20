@@ -17,8 +17,7 @@ for j=1: m
     a = A(:, j);
     Q(:, j) = a;
     if j>1
-        
-        
+           
         tmp = Q(1:n,1:j-1)'*Q(1:n,j-1:j); %%%%%%%%% <- this is the only synchronization
         %
         T(1:j-2,j-1) = tmp(1:j-2,1);
@@ -37,11 +36,7 @@ for j=1: m
         Q(1:n,j) = Q(1:n,j) - Q(1:n,1:j-1)*R(1:j-1,j);
         
     end
-    
-    
-    
-    
-    
+   
 end
 R(m,m) = norm(Q(:,m));
 Q(:,m) = Q(:,m)/R(m,m);
