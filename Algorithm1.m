@@ -4,7 +4,7 @@ function [ Q, R ] = Algorithm1( A, iter )
 % QR decomposition using Ruhe notation classical Gram-Schmidt
 % Sample use: A = rand(100); Algorithm1(A. 2);
 % second parameter is the number of orth steps per vector
-% (c) Julien Langou (CU Denver), K. Smirydowicz (NREL), S. J. Thomas (NREL)
+% (c) Julien Langou (CU Denver), K. Swirydowicz (NREL), S. J. Thomas (NREL)
 
 n=size(A, 1);
 m=size(A, 2);

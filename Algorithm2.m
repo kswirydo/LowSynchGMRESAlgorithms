@@ -3,7 +3,7 @@ function [ Q, R ] = Algorithm2( A, iter )
 % Implemented in NREL
 % QR decomposition using Ruhe notation mod Gram-Schmidt
 % Sample use: A = rand(100); Algorithm2(A);
-% (c) Julien Langou (CU Denver), K. Smirydowicz (NREL), S. J. Thomas (NREL)
+% (c) Julien Langou (CU Denver), K. Swirydowicz (NREL), S. J. Thomas (NREL)
 
 
 n=size(A, 1);
