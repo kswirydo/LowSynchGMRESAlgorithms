@@ -23,8 +23,8 @@ plot(restart, comboData(1,:), lineSpec{2}, 'LineWidth', 2, 'MarkerSize', 10, 'Ma
 grid on
 hold on
 plot(restart,  comboData(2,:), lineSpec{3}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor', markerFill{3});
-plot(restart,  comboData(3,:), lineSpec{4}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor', markerFill{3});
-plot(restart,  comboData(4,:), lineSpec{5}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor', markerFill{4});
+plot(restart,  comboData(3,:), lineSpec{4}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor', markerFill{4});
+plot(restart,  comboData(4,:), lineSpec{5}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor', markerFill{5});
   
   
 grid on
@@ -32,7 +32,7 @@ xlabel ('restart');
 ylabel('speedup');
 title('Speedup in relation to GMRES-MGS (HYPRE)')
 legend(  'GMRES-MGS (new implementation)', 'GMRES-CGS1 w/alt norm', 'GMRES-CGS2', 'GMRES-two synch')
-xlim([0 72])
+xlim([5 72])
 
 figure(2)
 
@@ -50,5 +50,5 @@ xlabel ('restart');
 ylabel('iterations');
 
 legend( 'GMRES-MGS (HYPRE)', 'GMRES-MGS (new implementation)', 'GMRES-CGS1 w/alt norm', 'GMRES-CGS2', 'GMRES-two synch')
-xlim([0 72])
+xlim([5 72])
 ylim([0 12000])
