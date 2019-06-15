@@ -15,24 +15,28 @@ lineSpec = {'b-o', 'k-<', 'r-d', 'g-s', 'k-d'};
 markerFill = {'c', 'g', 'y', 'k', 'r'};
 
 
-comboData = [ gmres_time./timeAll(1, :); gmres_time./timeAll(2, :); gmres_time./timeAll(3, :);  gmres_time./timeAll(4, :)  ];
-
 figure(1)
-
-plot(restart, comboData(1,:), lineSpec{2}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor', markerFill{2});
+plot(restart, (gmres_gs_time./gmres_time)*100, lineSpec{1}, 'LineWidth', 2, 'MarkerSize', 8, 'MarkerFaceColor',  markerFill{1});
 grid on
 hold on
-plot(restart,  comboData(2,:), lineSpec{3}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor', markerFill{3});
-plot(restart,  comboData(3,:), lineSpec{4}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor', markerFill{4});
-plot(restart,  comboData(4,:), lineSpec{5}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor', markerFill{5});
-  
-  
-grid on
-xlabel ('restart');
-ylabel('speedup');
-title('Speedup in relation to GMRES-MGS (HYPRE)')
-legend(  'GMRES-MGS (new implementation)', 'GMRES-CGS1 w/alt norm', 'GMRES-CGS2', 'GMRES-two synch')
+plot(restart, (timeGSAll(1,:)./timeAll(1, :))*100, lineSpec{2}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor',  markerFill{2});
+plot(restart, (timeGSAll(2,:)./timeAll(2, :))*100, lineSpec{3}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor',  markerFill{3});
+plot(restart, (timeGSAll(3,:)./timeAll(3, :))*100, lineSpec{4}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor',  markerFill{4});
+plot(restart, (timeGSAll(4,:)./timeAll(4, :))*100, lineSpec{5}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor',  markerFill{5});
+ax=gca;
+ax.FontSize=18;
+
+xlabel('restart','FontSize', 18, 'FontWeight','bold')
+ylabel('ratio: time for GS to time to solution (%)', 'FontSize', 18, 'FontWeight','bold')
+ll1 = legend( 'GMRES-MGS (HYPRE)', 'GMRES-MGS (new implementation)', 'GMRES-CGS1 w/alt norm',...
+    'GMRES-CGS2', 'GMRES-two synch', 'Location', 'southeast')
+ll1.FontSize=14;
 xlim([5 72])
+ylim([0 100])
+
+
+print(gcf, '-djpeg','-r300', 'sc18fig1.jpg');
+
 
 figure(2)
 
@@ -43,12 +47,16 @@ plot(restart, itersAll(1,:), lineSpec{2}, 'LineWidth', 2, 'MarkerSize', 10, 'Mar
 plot(restart, itersAll(2,:), lineSpec{3}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor', markerFill{3});
 plot(restart, itersAll(3,:), lineSpec{4}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor', markerFill{4});
 plot(restart, itersAll(4,:), lineSpec{5}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor', markerFill{5});
+ax=gca;
+ax.FontSize=18;
 
+title('Number of iterations', 'FontSize', 20, 'FontWeight', 'bold');
+xlabel ('restart',  'FontSize', 18, 'FontWeight','bold');
+ylabel('iterations',  'FontSize', 18, 'FontWeight','bold');
 
-title('Number of iterations');
-xlabel ('restart');
-ylabel('iterations');
-
-legend( 'GMRES-MGS (HYPRE)', 'GMRES-MGS (new implementation)', 'GMRES-CGS1 w/alt norm', 'GMRES-CGS2', 'GMRES-two synch')
+ll2=legend( 'GMRES-MGS (HYPRE)', 'GMRES-MGS (new implementation)', 'GMRES-CGS1 w/alt norm', 'GMRES-CGS2', 'GMRES-two synch')
+ll2.FontSize=14;
 xlim([5 72])
 ylim([0 12000])
+
+print(gcf, '-djpeg','-r300', 'sc18fig3.jpg');

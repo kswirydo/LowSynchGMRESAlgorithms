@@ -13,6 +13,7 @@ load('itersAll');
 
 lineSpec = {'b-o', 'k-<', 'r-d', 'g-s', 'k-d'};
 markerFill = {'c', 'g', 'y', 'k', 'r'};
+comboData = [ gmres_time./timeAll(1, :); gmres_time./timeAll(2, :); gmres_time./timeAll(3, :);  gmres_time./timeAll(4, :)  ];
 
 figure(1)
 plot(restart, gmres_time, lineSpec{1}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor', markerFill{1});
@@ -23,29 +24,39 @@ plot(restart, timeAll(1, :), lineSpec{2}, 'LineWidth', 2, 'MarkerSize', 10, 'Mar
 plot(restart, timeAll(2, :), lineSpec{3}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor',  markerFill{3});
 plot(restart,timeAll(3, :), lineSpec{4}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor',  markerFill{4});
 plot(restart,timeAll(4, :), lineSpec{5}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor',  markerFill{5});
+ax=gca;
+ax.FontSize=18;
 
-xlabel('restart')
-ylabel('time to solution(s)')
-legend( 'GMRES-MGS (HYPRE)',...
+xlabel('restart', 'FontSize', 18, 'FontWeight','bold')
+ylabel('time to solution(s)', 'FontSize', 18, 'FontWeight','bold')
+
+ll1 =legend( 'GMRES-MGS (HYPRE)',...
     'GMRES-MGS (new implementation)',...
     'GMRES-CGS1 w/alt norm',...
     'GMRES-CGS2',...
-    'GMRES-two synch');
-xlim([0 72])
+    'GMRES-two synch', 'Location', 'northwest');
+ll1.FontSize=14;
+xlim([5 72])
 ylim([0 110])
+print(gcf, '-djpeg','-r300', 'sc18fig0.jpg');
 
 figure(2) 
-plot(restart, (gmres_gs_time./gmres_time)*100, lineSpec{1}, 'LineWidth', 2, 'MarkerSize', 8, 'MarkerFaceColor',  markerFill{1});
+
+plot(restart, comboData(1,:), lineSpec{2}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor', markerFill{2});
 grid on
 hold on
-plot(restart, (timeGSAll(1,:)./timeAll(1, :))*100, lineSpec{2}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor',  markerFill{2});
-plot(restart, (timeGSAll(2,:)./timeAll(2, :))*100, lineSpec{3}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor',  markerFill{3});
-plot(restart, (timeGSAll(3,:)./timeAll(3, :))*100, lineSpec{4}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor',  markerFill{4});
-plot(restart, (timeGSAll(4,:)./timeAll(4, :))*100, lineSpec{5}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor',  markerFill{5});
-
-xlabel('restart')
-ylabel('ratio: time for GS to time to solution (%)')
-legend( 'GMRES-MGS (HYPRE)', 'GMRES-MGS (new implementation)', 'GMRES-CGS1 w/alt norm', 'GMRES-CGS2', 'GMRES-two synch')
-xlim([0 72])
-ylim([0 100])
-
+plot(restart,  comboData(2,:), lineSpec{3}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor', markerFill{3});
+plot(restart,  comboData(3,:), lineSpec{4}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor', markerFill{4});
+plot(restart,  comboData(4,:), lineSpec{5}, 'LineWidth', 2, 'MarkerSize', 10, 'MarkerFaceColor', markerFill{5});
+  
+ax=gca;
+ax.FontSize=18;  
+grid on
+xlabel ('restart', 'FontSize', 18, 'FontWeight','bold');
+ylabel('speedup',  'FontSize', 18, 'FontWeight','bold');
+title('Speedup in relation to GMRES-MGS (HYPRE)',  'FontSize', 20, 'FontWeight','bold');
+ll2=legend(  'GMRES-MGS (new implementation)', 'GMRES-CGS1 w/alt norm', 'GMRES-CGS2', 'GMRES-two synch',...
+    'Location', 'northwest');
+ll2.FontSize=14;
+xlim([5 72])
+print(gcf, '-djpeg','-r300', 'sc18fig2.jpg');
